@@ -48,8 +48,7 @@ jobs:
           find . -iregex "codecov.*"
           chmod +x codecov 
           ./codecov -t ${CODECOV_TOKEN}
-        with:
-          fail_ci_if_error: true
+        fail_ci_if_error: true
 
       - name: Build
         run: npm run build
