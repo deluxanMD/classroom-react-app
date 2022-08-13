@@ -49,11 +49,6 @@ jobs:
             name: codecov-umbrella
             fail_ci_if_error: true
             verbose: true
-        - run: |
-            curl -Os https://uploader.codecov.io/latest/linux/codecov
-            find . -iregex "codecov.*"
-            chmod +x codecov 
-            ./codecov -t ${CODECOV_TOKEN}
 
       - name: Build
         run: npm run build
