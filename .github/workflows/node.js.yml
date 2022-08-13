@@ -41,14 +41,14 @@ jobs:
         run: npm test -- --coverage
 
       - name: Upload reports to codecov
-        - uses: codecov/codecov-action@v3
-          with:
-            token: ${{ secrets.CODECOV_TOKEN }}
-            files: ./coverage1.xml,./coverage2.xml
-            flags: unittests
-            name: codecov-umbrella
-            fail_ci_if_error: true
-            verbose: true
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage1.xml,./coverage2.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          verbose: true
 
       - name: Build
         run: npm run build
