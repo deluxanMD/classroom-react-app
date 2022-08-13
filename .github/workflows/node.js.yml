@@ -40,13 +40,14 @@ jobs:
       - name: Run the tests and generate coverage report
         run: npm test -- --coverage
 
-      - name: Upload coverage to CodeCov
-        uses: iansu/codecov-action-node@v1
-        with:
-          token: ${{secrets.CODECOV_TOKEN}}
-          file: ./coverage.xml
-          flags: unittests
-          name: codecov-umbrella
+      - name: Upload reports to codecov
+        env:
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+        run: | 
+        curl -Os https://uploader.codecov.io/latest/linux/codecov
+        find . -iregex "codecov.*"
+        chmod +x codecov 
+        ./codecov -t ${CODECOV_TOKEN}
 
       - name: Build
         run: npm run build
