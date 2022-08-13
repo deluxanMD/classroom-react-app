@@ -27,11 +27,26 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
       - name: Install dependencies
         run: npm install
 
-      - name: Run the tests
-        run: npm test
+      - name: Run the tests and generate coverage report
+        run: npm test -- --coverage
+
+      - name: Upload coverage to CodeCov
+        uses: iansu/codecov-action-node@v1
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: ./coverage.xml
+          flags: unittests
+          name: codecov-umbrella
 
       - name: Build
         run: npm run build
