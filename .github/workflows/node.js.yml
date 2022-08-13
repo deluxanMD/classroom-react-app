@@ -45,7 +45,7 @@ jobs:
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
         with:
           fail_ci_if_error: true
-      - run: |
+        run: |
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           find . -iregex "codecov.*"
           chmod +x codecov 
