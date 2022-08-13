@@ -43,13 +43,13 @@ jobs:
       - name: Upload reports to codecov
         env:
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
-        with:
-          fail_ci_if_error: true
-        - run: |
+        run: |
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           find . -iregex "codecov.*"
           chmod +x codecov 
           ./codecov -t ${CODECOV_TOKEN}
+        with:
+          fail_ci_if_error: true
 
       - name: Build
         run: npm run build
