@@ -48,12 +48,12 @@ jobs:
           fail_ci_if_error: true
           verbose: true
       - run: |
+          cat codecov.yml | curl --data-binary @- https://codecov.io/validate
+      - run: |
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           find . -iregex "codecov.*"
           chmod +x codecov 
           ./codecov -t ${CODECOV_TOKEN}
-      - run: |
-          cat codecov.yml | curl --data-binary @- https://codecov.io/validate
 
       - name: Build
         run: npm run build
