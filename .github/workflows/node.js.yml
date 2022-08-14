@@ -43,12 +43,10 @@ jobs:
       - uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          flags: unittests
+          flags: frontend
           name: Upload reports to codecov
           fail_ci_if_error: true
           verbose: true
-      - run: |
-          cat codecov.yml | curl --data-binary @- https://codecov.io/validate
       - run: |
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           find . -iregex "codecov.*"
