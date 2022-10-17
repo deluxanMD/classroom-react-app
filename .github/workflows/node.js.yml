@@ -53,8 +53,6 @@ jobs:
           find . -iregex "codecov.*"
           chmod +x codecov 
           ./codecov -t ${CODECOV_TOKEN}
-      - run: |
-          cat codecov.yml | curl --data-binary @- https://codecov.io/validate
 
       - name: Build
         run: npm run build
