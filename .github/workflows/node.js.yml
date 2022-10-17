@@ -10,7 +10,7 @@ on:
     branches: ["master"]
 
 jobs:
-  build:
+  setup:
     runs-on: ubuntu-latest
 
     strategy:
@@ -37,15 +37,22 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Generate code coverage
-      - name: Run the tests and generate coverage report
-        run: npm test -- --coverage
+  lint-and-prettier:
+    runs-on: ubuntu-latest
 
+    steps:
       - run: npm run lint
       - run: npm run format:check
       - run: npm test -- --coverage
         env:
           CI: true
+
+  code-coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run the tests and generate coverage report
+        run: npm test -- --coverage
 
       - uses: codecov/codecov-action@v3
         with:
@@ -60,5 +67,9 @@ jobs:
           chmod +x codecov 
           ./codecov -t ${CODECOV_TOKEN}
 
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Build
         run: npm run build
