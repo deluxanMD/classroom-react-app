@@ -37,6 +37,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # Generate code coverage
       - name: Run the tests and generate coverage report
         run: npm test -- --coverage
 
