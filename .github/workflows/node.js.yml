@@ -16,7 +16,6 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - name: Checkout repository
@@ -40,6 +39,10 @@ jobs:
   lint-and-prettier:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [16.x]
+
     steps:
       - run: npm run lint
       - run: npm run format:check
@@ -49,6 +52,10 @@ jobs:
 
   code-coverage:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
 
     steps:
       - name: Run the tests and generate coverage report
@@ -69,6 +76,10 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
 
     steps:
       - name: Build
