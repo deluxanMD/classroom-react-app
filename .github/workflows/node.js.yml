@@ -41,6 +41,12 @@ jobs:
       - name: Run the tests and generate coverage report
         run: npm test -- --coverage
 
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm test -- --coverage
+        env:
+          CI: true
+
       - uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
