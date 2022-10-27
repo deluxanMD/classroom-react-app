@@ -33,6 +33,12 @@ jobs:
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
+      - name: Just a try
+        run: |
+          rm -rf node_modules
+          rm -rf package-lock.json
+          npm install eslint@8.26.0
+
       - name: Install dependencies
         run: npm install
 
@@ -45,9 +51,6 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
       - run: npm run lint
       - run: npm run format:check
       - run: npm test -- --coverage
